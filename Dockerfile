@@ -1,7 +1,5 @@
 FROM golang:1.13.6-alpine as builder
 
-COPY ./main.go /src/caddy/cmd/caddy/main.go
-
 WORKDIR /src
 
 RUN apk add --no-cache \
@@ -13,6 +11,8 @@ ARG CADDY_SOURCE_VERSION=v2
 RUN git clone -b $CADDY_SOURCE_VERSION https://github.com/caddyserver/caddy.git --depth 1
 
 WORKDIR /src/caddy/cmd/caddy
+
+ADD https://raw.githubusercontent.com/eduha/caddy-docker/master/main.go /src/caddy/cmd/caddy/main.go
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -trimpath -tags netgo -ldflags '-extldflags "-static" -s -w' -o /usr/bin/caddy
