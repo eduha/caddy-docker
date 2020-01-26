@@ -5,6 +5,8 @@ export DOCKER_REPO=${DOCKER_REPO:-caddy/caddy}
 export DOCKER_TAG=${DOCKER_TAG:-latest}
 export IMAGE_NAME=${IMAGE_NAME:-$DOCKER_REPO:$DOCKER_TAG}
 
+echo "pushing"
+
 docker push "$DOCKER_REPO:alpine"
 docker push "$DOCKER_REPO:scratch"
 
