@@ -10,6 +10,7 @@ ARG CADDY_SOURCE_VERSION=v2
 
 RUN git clone -b $CADDY_SOURCE_VERSION https://github.com/caddyserver/caddy.git --depth 1
 
+COPY ./main.go /src/caddy/cmd/caddy/main.go
 WORKDIR /src/caddy/cmd/caddy
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
